@@ -1,0 +1,17 @@
+// common
+@import "common/reset";
+@import "common/variables";
+@import "common/typography";
+@import "common/inheritance";
+@import "common/mixins";
+@import "common/global";
+
+// components go here
+
+// layout
+@import "layout/header";
+@import "layout/main";
+@import "layout/footer";
+
+// pages
+@import "pages/index";

@@ -1,0 +1,35 @@
+%blur {
+  @mixin life() {
+    content: "";
+    //width: 200%;
+    //height: 200%;
+    left: -500px;
+    top: -500px;
+    right: -500px;
+    bottom: -500px;
+    position: absolute;
+  }
+  display: block;
+  overflow: hidden;
+  position: relative;
+
+  &:before {
+    background: linear-gradient(
+                    rgba(255, 255, 255, 0.4),
+                    rgba(255, 255, 255, 0.4)
+    ),
+    url($background);
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-position: center;
+    background-attachment: fixed;
+
+    filter: blur(10px) contrast(115%);
+    @include life();
+  }
+  &:after {
+  }
+  > * {
+    position: relative;
+  }
+}

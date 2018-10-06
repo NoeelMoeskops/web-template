@@ -1,0 +1,36 @@
+{
+  "name": "web-temlate",
+  "version": "1.0.0",
+  "description": "web-temlate",
+  "main": "gulpfile.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/NoeelMoeskops/web-template.git"
+  },
+  "license": "UNLICENSED",
+  "private": false,
+  "bugs": {
+    "url": "https://github.com/NoeelMoeskops/web-template/issues"
+  },
+  "homepage": "https://github.com/NoeelMoeskops/web-template#readme",
+  "devDependencies": {
+    "bower": "^1.8.4",
+    "browser-sync": "^2.24.6",
+    "gulp": "^3.9.1",
+    "gulp-autoprefixer": "^4.0.0",
+    "gulp-connect": "^5.5.0",
+    "gulp-connect-php": "^1.0.1",
+    "gulp-minify": "^1.0.0",
+    "gulp-sass": "^3.1.0",
+    "gulp-sourcemaps": "^2.6.1",
+    "gulp-typescript": "^3.2.2",
+    "gulp-watch": "^4.3.11",
+    "typescript": "^3.0.1"
+  },
+  "dependencies": {
+    "normalize.css": "^8.0.0"
+  }
+}

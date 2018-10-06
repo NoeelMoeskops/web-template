@@ -1,0 +1,11 @@
+html {
+  min-height: 100%;
+  //overflow: hidden;
+  body {
+    min-height: 100%;
+  }
+}
+* {
+  transition: all linear 0.1s;
+  box-sizing: border-box;
+}

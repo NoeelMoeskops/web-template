@@ -1,0 +1,136 @@
+// mixins scss
+
+// mobiel dingen
+$XXsmall: 140px;
+$Xsmall: 320px;
+$small: 525px;
+$medium: 770px;
+$large: 1024px;
+$Xlarge: 1440px;
+$XXlarge: 2560px;
+
+
+@function breaker($media) {
+  @if ($media == 'XXsmall') {
+    $media: $XXsmall;
+  }
+  @else if ($media == 'Xsmall') {
+    $media: $Xsmall;
+  }
+  @else if ($media == 'small') {
+    $media: $small;
+  }
+  @else if ($media == 'medium') {
+    $media: $medium;
+  }
+  @else if ($media == 'large') {
+    $media: $large;
+  }
+  @else if ($media == 'Xlarge') {
+    $media: $Xlarge;
+  }
+  @else if ($media == 'XXlarge') {
+    $media: $XXlarge;
+  }
+  @return $media;
+}
+@mixin breakSmallerThen($media) {
+  $media: breaker($media);
+  @media only screen and (max-width: $media) {
+    @content;
+  }
+}
+
+@mixin breakBiggerThen($media) {
+  $media: breaker($media);
+  @media only screen and (min-width: $media) {
+    @content;
+  }
+}
+@mixin breakBetween($small, $big) {
+  $small: breaker($small);
+  $big: breaker($big);
+  @media only screen and (min-width: $small) and (max-width: $big) {
+    @content;
+  }
+}
+@mixin BreakNotBetween($small, $big) {
+  $small: breaker($small);
+  $big: breaker($big);
+  @media only screen and (max-width: $small) {
+    @content;
+  }
+  @media only screen and (min-width: $big) {
+    @content;
+  }
+}
+
+// grid
+$grid-mainWidth: 900px;
+$grid-miniMainWidth: 0.6;
+$grid-margin: 32px;
+@mixin gridTemplate($mainWidth: $grid-mainWidth, $margin: $grid-margin, $sidebar: 1fr) {
+
+  // TODO geeft error omdat een mixin in een mixin blijbaar illegaal is.
+  //@mixin grid
+  //@mixin grid($mainWidth, $margin, $sidebar, $miniMainMargin: null, $miniMain: null) {
+  //  @if $miniMainMargin == null {
+  //    $miniMainMargin: ($mainWidth * (1 - $grid-miniMainWidth))/2;
+  //  }
+  //  @if $miniMain == null {
+  //    $miniMain: $grid-mainWidth * $grid-miniMainWidth;
+  //  }
+  //  //miniMain: $miniMain;
+  //  //miniMainMargin: $miniMainMargin;
+  //
+  //
+  //  grid-template-columns:
+  //          [marginLeft] $margin [sideLeft] $sidebar
+  //          [mainStart] $miniMainMargin [miniMain] $miniMain [mainEnd] $miniMainMargin
+  //          [sideRight] $sidebar [marginRight] $margin;
+  //}
+
+  display: grid;
+  grid-template-rows: auto;
+
+  @include grid($mainWidth, $margin, $sidebar);
+
+  // if width is smaller then mainwidth
+  @media screen and (max-width:$mainWidth + ($margin * 2)) {
+    //break: mainWidth;
+    @include grid(1fr, $margin, 0, 1fr);
+  }
+  // if width is smaller then miniWidth
+  @media screen and (max-width: ($margin * 2) + ($grid-mainWidth * $grid-miniMainWidth)) {
+    //break:miniWidth;
+    @include grid(1fr, $margin, 0, 0, 1fr);
+  }
+}
+
+
+%grid-miniMain {
+  @mixin grid($width, $margin) {
+    grid-template-columns: [sideLeft] $margin [miniMain] $width [sideRight] $margin;
+  }
+  $width: $grid-mainWidth * $grid-miniMainWidth;
+  //per: $width;
+  @include grid($width, 1fr);
+
+  display: grid;
+  grid-template-rows: 1fr;
+  grid-template-areas: ". miniMain .";
+
+  @media screen and (max-width: $width + ($grid-margin * 2)) {
+    @include grid(100%, 0);
+  }
+  * > {
+    width: 100%;
+  }
+}
+
+.no-margin {
+  grid-column: sideLeft / marginRight;
+}
+.miniMain-child {
+  grid-area: miniMain;
+}
